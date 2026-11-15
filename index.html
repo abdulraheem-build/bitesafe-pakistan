@@ -1,459 +1,68 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0f5f6e">
-<title>BiteSafe Pakistan</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@700;800&family=DM+Sans:wght@500;600;700&family=Noto+Naskh+Arabic:wght@500;700&display=swap" rel="stylesheet">
-<style>
-:root{--ink:#14212b;--teal:#0f5f6e;--teal2:#0a4753;--coral:#ff6b5b;--sun:#ffc233;--mint:#7be0b5;--sky:#7cc4ff;--lilac:#c3b3ff;--bg:#e9f3f1;--mut:#455a66;--sh:4px 4px 0 var(--ink)}
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{margin:0;color:var(--ink);font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.4;background-color:var(--bg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='%230f5f6e' fill-opacity='.07'%3E%3Cg transform='translate(36 40) rotate(-20)'%3E%3Cellipse cx='0' cy='7' rx='10' ry='8'/%3E%3Ccircle cx='-11' cy='-5' r='4'/%3E%3Ccircle cx='-4' cy='-11' r='4'/%3E%3Ccircle cx='4' cy='-11' r='4'/%3E%3Ccircle cx='11' cy='-5' r='4'/%3E%3C/g%3E%3Cg transform='translate(112 112) rotate(24) scale(1.25)'%3E%3Cellipse cx='0' cy='7' rx='10' ry='8'/%3E%3Ccircle cx='-11' cy='-5' r='4'/%3E%3Ccircle cx='-4' cy='-11' r='4'/%3E%3Ccircle cx='4' cy='-11' r='4'/%3E%3Ccircle cx='11' cy='-5' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
-#app{max-width:480px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
-#app[dir=rtl]{font-family:"Noto Naskh Arabic","Segoe UI",Tahoma,"Noto Sans Arabic",system-ui,sans-serif;line-height:1.7}
-h1,h2,h3{font-family:"Bricolage Grotesque","DM Sans",system-ui,sans-serif}
-#app[dir=rtl] h1,#app[dir=rtl] h2,#app[dir=rtl] h3{font-family:"Noto Naskh Arabic","Segoe UI",Tahoma,sans-serif}
-
-header{position:relative;overflow:hidden;background-color:var(--teal);color:#fff;padding:14px 16px 18px;padding-top:max(14px,env(safe-area-inset-top));display:flex;align-items:center;gap:12px;border-bottom:3px solid var(--ink);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='%23ffffff' fill-opacity='.10'%3E%3Cg transform='translate(32 36) rotate(-20)'%3E%3Cellipse cx='0' cy='7' rx='10' ry='8'/%3E%3Ccircle cx='-11' cy='-5' r='4'/%3E%3Ccircle cx='-4' cy='-11' r='4'/%3E%3Ccircle cx='4' cy='-11' r='4'/%3E%3Ccircle cx='11' cy='-5' r='4'/%3E%3C/g%3E%3Cg transform='translate(98 98) rotate(24) scale(1.2)'%3E%3Cellipse cx='0' cy='7' rx='10' ry='8'/%3E%3Ccircle cx='-11' cy='-5' r='4'/%3E%3Ccircle cx='-4' cy='-11' r='4'/%3E%3Ccircle cx='4' cy='-11' r='4'/%3E%3Ccircle cx='11' cy='-5' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
-header .dogh{width:66px;height:62px;flex:none}
-header h1{margin:0;font-size:25px;line-height:1.05;font-weight:800;letter-spacing:-.3px}
-header p{margin:3px 0 0;font-size:13px;opacity:.95}
-.badge{display:inline-block;margin-top:6px;background:var(--sun);color:var(--ink);border:2px solid var(--ink);border-radius:999px;padding:0 10px;font-weight:700;font-size:12px}
-.lang{margin-inline-start:auto;flex:none;background:#fff;color:var(--ink);border:2.5px solid var(--ink);border-radius:999px;padding:8px 14px;font-weight:700;font-size:14px;min-height:44px;font-family:inherit;box-shadow:3px 3px 0 var(--ink)}
-
-main{flex:1;padding:16px 14px 100px;display:flex;flex-direction:column;gap:14px}
-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:#fff;border-top:3px solid var(--ink);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:5}
-nav button{flex:1;border:0;border-inline-start:2px solid var(--ink);background:#fff;padding:8px 2px 7px;font-size:12px;font-weight:700;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:2px;min-height:60px;font-family:inherit}
-nav button:first-child{border-inline-start:0}
-nav button svg{width:24px;height:24px}
-nav button.on{background:var(--sun)}
-
-.card{background:#fff;border:2.5px solid var(--ink);border-radius:16px;padding:14px;box-shadow:var(--sh)}
-.card h2,.card h3{margin:0 0 6px;font-size:18px}
-.row{display:flex;gap:10px;align-items:center}
-.sp{justify-content:space-between}
-.mut{color:var(--mut);font-size:13px}
-.chip{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--ink);border-radius:999px;padding:1px 10px;font-size:12px;font-weight:700;white-space:nowrap}
-.ok{background:#bff3dc;color:#0b4f33}.low{background:#ffe29a;color:#5c3f00}.out{background:#ffc9c2;color:#7e170d}
-.dot{width:8px;height:8px;border-radius:50%;background:currentColor}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 6px}
-.fchip{flex:none;border:2.5px solid var(--ink);background:#fff;color:var(--ink);border-radius:999px;padding:8px 14px;font-weight:700;font-size:14px;min-height:44px;font-family:inherit}
-.fchip.on{background:var(--teal);color:#fff}
-.btn{border:2.5px solid var(--ink);border-radius:14px;background:var(--teal);color:#fff;font-weight:700;font-size:16px;padding:12px 16px;min-height:50px;width:100%;font-family:inherit;box-shadow:var(--sh)}
-.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
-.btn.sun{background:var(--sun);color:var(--ink)}
-.btn.coral{background:var(--coral);color:var(--ink)}
-.btn.ghost{background:#fff;color:var(--ink)}
-.btn.sm{width:auto;font-size:14px;min-height:44px;padding:8px 14px;box-shadow:3px 3px 0 var(--ink)}
-a.btn{display:flex;align-items:center;justify-content:center;text-decoration:none}
-label{display:block;font-weight:700;font-size:14px;margin:12px 0 4px}
-input,select{width:100%;font:inherit;padding:12px;border:2.5px solid var(--ink);border-radius:12px;background:#fff;min-height:50px;color:var(--ink)}
-input:focus,select:focus,button:focus-visible,a:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
-
-.hero{background:var(--sun);display:flex;align-items:center;gap:12px;overflow:hidden}
-.hero h2{font-size:23px;margin:0 0 4px;line-height:1.15}
-.hero p{margin:0 0 12px;font-size:15px}
-.hero .dogb{width:112px;height:104px;flex:none;margin-inline-start:auto}
-.alert{background:#fff;border:2.5px solid var(--ink);border-inline-start:10px solid var(--coral);border-radius:14px;padding:12px 14px;font-size:14.5px;box-shadow:var(--sh)}
-.alert b{display:block;margin-bottom:2px;font-size:16px}
-.alert{display:flex;flex-direction:column;justify-content:center}
-#app[dir=rtl] .hero h2{font-size:19px;line-height:1.5}
-#app[dir=rtl] .hero .btn{font-size:15px}
-.top2{display:flex;flex-direction:column;gap:14px}
-.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.kpi{border:2.5px solid var(--ink);border-radius:14px;padding:10px;box-shadow:3px 3px 0 var(--ink)}
-.kpi b{display:block;font-family:"Bricolage Grotesque","DM Sans",sans-serif;font-size:28px;line-height:1.1}
-.kpi span{font-size:12px;font-weight:700;display:block;line-height:1.25}
-.hgrid{display:flex;flex-direction:column;gap:14px}
-.hosp{display:flex;flex-direction:column;gap:8px}
-.big{font-family:"Bricolage Grotesque","DM Sans",sans-serif;font-size:48px;font-weight:800;line-height:1;color:var(--teal)}
-.stepper{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
-.stepper button{border:2.5px solid var(--ink);background:#fff;color:var(--ink);border-radius:12px;font-weight:800;font-size:16px;min-height:50px;font-family:inherit;box-shadow:2px 2px 0 var(--ink)}
-.stepper button:active{transform:translate(2px,2px);box-shadow:none}
-.dose{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:2px dashed #b8cdd2}
-.dose:first-of-type{border-top:0}
-.circle{width:32px;height:32px;border:2px solid var(--ink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;flex:none;background:#e3eef0}
-.circle.done{background:var(--mint)}
-.circle.next{background:var(--sun)}
-.circle.late{background:var(--coral)}
-.chat{background:#e7ddd0;border:2px solid var(--ink);border-radius:14px;padding:12px}
-.bubble{background:#dcf8c6;border:2px solid var(--ink);border-radius:14px 14px 3px 14px;padding:10px 12px;font-size:14px;margin-inline-start:auto;max-width:94%}
-#app[dir=rtl] .bubble{border-radius:14px 14px 14px 3px}
-.bubble small{display:block;text-align:end;color:#3d4d3d;font-size:11px;margin-top:4px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.stat{border:2.5px solid var(--ink);border-radius:14px;padding:12px;box-shadow:3px 3px 0 var(--ink);background:#fff}
-.stat b{display:block;font-family:"Bricolage Grotesque","DM Sans",sans-serif;font-size:30px;line-height:1.1;color:var(--teal)}
-.stat span{font-size:12px;color:var(--mut);font-weight:700}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th,td{padding:8px 4px;text-align:start;border-top:2px dashed #b8cdd2}
-th{font-size:11px;color:var(--mut);text-transform:uppercase;border-top:0}
-.split{display:flex;flex-direction:column;gap:14px}
-.toast{position:fixed;left:50%;bottom:84px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-size:14px;z-index:20;max-width:90%;text-align:center;border:2px solid #fff}
-.foot{font-size:12px;color:var(--mut);text-align:center}
-.empty{text-align:center;color:var(--mut);padding:18px 8px;font-size:14px}
-.title2{margin:4px 2px 0;font-size:19px}
-
-.team{background:var(--ink);color:#fff;border-radius:18px;padding:16px;box-shadow:var(--sh);border:2.5px solid var(--ink);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='%23ffffff' fill-opacity='.06'%3E%3Cg transform='translate(32 36) rotate(-20)'%3E%3Cellipse cx='0' cy='7' rx='10' ry='8'/%3E%3Ccircle cx='-11' cy='-5' r='4'/%3E%3Ccircle cx='-4' cy='-11' r='4'/%3E%3Ccircle cx='4' cy='-11' r='4'/%3E%3Ccircle cx='11' cy='-5' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
-.team h3{margin:0 0 10px;font-size:20px;color:var(--sun)}
-.members{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.mem{background:#fff;color:var(--ink);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:4px}
-.mem b{font-size:15px;line-height:1.2}
-.mem .chip{align-self:flex-start;background:var(--sun);font-size:12px}
-.soon{overflow:hidden;padding:0}
-.soon .top{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:2.5px solid var(--ink)}
-.soon .top svg{width:64px;height:48px;flex:none}
-.soon .top h3{margin:0;font-size:19px}
-.soon .bd{padding:12px 14px 14px}
-.soon ul{margin:0 0 10px;padding-inline-start:20px;display:flex;flex-direction:column;gap:5px;font-size:14.5px}
-.soon .tip{background:#fff7dc;border:2px dashed var(--ink);border-radius:12px;padding:8px 10px;font-size:13.5px}
-.soonb{background:var(--ink);color:#fff;border-radius:999px;padding:0 10px;font-size:12px;font-weight:700;margin-inline-start:auto;white-space:nowrap}
-
-@media (min-width:760px){
- #app{max-width:1180px}
- header{border:3px solid var(--ink);border-top:0;border-radius:0 0 26px 26px;padding:18px 32px;gap:18px}
- header .dogh{width:92px;height:86px}
- header h1{font-size:36px}
- header p{font-size:15px}
- nav{position:static;transform:none;max-width:none;width:auto;order:1;border:0;justify-content:center;gap:12px;padding:16px 0 0;background:transparent}
- nav button{flex:none;flex-direction:row;gap:8px;padding:10px 24px;min-height:50px;font-size:15px;cursor:pointer;border:2.5px solid var(--ink);border-radius:999px;box-shadow:3px 3px 0 var(--ink)}
- nav button:first-child{border:2.5px solid var(--ink)}
- main{order:2;width:100%;padding:20px 28px 36px}
- .top2{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;align-items:stretch}
- .hgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
- .grid2{grid-template-columns:repeat(4,1fr)}
- .btn{width:auto;min-width:260px;align-self:flex-start}
- .btn.sm{min-width:0}
- .btn:hover,.fchip:hover,.lang:hover,nav button:hover{filter:brightness(1.06);cursor:pointer}
- .stepper{max-width:520px}
- .toast{bottom:28px}
- .chat{max-width:560px}
- .hero h2{font-size:30px}
- .hero p{font-size:17px}
- .hero .dogb{width:170px;height:158px}
- .members{grid-template-columns:repeat(4,1fr)}
- .kpi b{font-size:34px}
- .softgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-}
-@media (min-width:1000px){
- .hgrid{grid-template-columns:1fr 1fr 1fr}
- .split{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:start}
- .softgrid{grid-template-columns:repeat(4,1fr)}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abdul Raheem | Web Developer</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div id="app"></div>
-<script>
-(function(){
-"use strict";
-var LS="bitesafe_pk_v3",DAY=864e5,DOSE_DAYS=[0,3,7,14];
-function sod(t){var d=new Date(t);d.setHours(0,0,0,0);return d.getTime();}
-var TODAY=sod(Date.now());
-var TAL=["Dadu","Mehar","Johi","Khairpur Nathan Shah"];
-var TEAM=[["Abdul Raheem","2k25/DIT/04"],["Sidra Solangi","2k25/DIT/61"],["Tabbasum Chana","2k25/DIT/62"],["Kanwal Abbasi","2k25/DIT/24"]];
 
-var I18N={
-en:{sub:"Find rabies vaccine. Never miss a dose.",tag:"For dog bite victims and their families",
- tab1:"Patient",tab2:"Hospital",tab3:"Admin",tab4:"Coming soon",
- hero_t:"Bitten by a dog?",hero_b:"Stay calm. Wash the wound, then find a hospital that has the vaccine today.",
- fa_t:"First aid, do this now",fa_b:"Wash the wound with soap and running water for at least 15 minutes. Then go to a hospital for the vaccine. Do not put chilli or oil on the wound, and do not tie it tightly.",
- k1:"Hospitals with vaccine today",k2:"Doses in stock",k3:"Cases registered",
- all:"All",only:"Only with vaccine",near:"Hospitals near you",avail:"Available",lowS:"Low",outS:"Out of stock",doses:"doses",upd:"Updated",ago:"ago",now:"just now",min:"min",hr:"h",
- dir:"Directions",reg:"I was bitten: register my case",mycase:"My case",sched:"Dose schedule",day:"Day",due:"Due",given:"Given",overdue:"Overdue",
- rem:"Preview my reminder message",name:"Patient name",phone:"Mobile number",tal:"Your taluka",hosp:"Preferred hospital",bite:"When were you bitten?",
- today:"Today",yest:"Yesterday",daysago:"days ago",save:"Register and get schedule",back:"Back",saved:"Case registered. Schedule created.",
- hl:"Hospital staff login",hsel:"Select hospital",pin:"PIN",pinh:"Sample PIN: 1234",login:"Login",logout:"Logout",badpin:"Wrong PIN",
- stock:"Vaccine doses in stock",out0:"Set to zero",pend:"Patients waiting for doses",giveb:"Mark dose given",nopat:"No patients for this hospital.",nostock:"No stock. Update stock first.",stockup:"Stock updated. Patients can see it now.",dgiven:"Dose recorded.",
- ad:"National dashboard",ad2:"Sample data, Dadu district",h_n:"Hospitals",s_n:"Doses in stock",c_n:"Active cases",l_n:"Low or empty",map:"Hotspot map (schematic)",
- cases:"Cases",need:"Doses needed",ins:"Stock check by taluka",short:"Shortage",fine:"OK",alerts:"Alerts",noal:"No alerts. All hospitals have stock.",
- copy:"Copy monthly report",copied:"Report copied.",reset:"Reset sample data",rdone:"Sample data reset.",
- team:"Team Bite Busters",
- foot:"Prototype. The hospitals, patients and numbers shown here are sample data.",
- rtxt:"BiteSafe Pakistan: Hello {n}, your next rabies vaccine dose is due on {d} at {h}. Please do not miss it.",rprev:"WhatsApp / SMS preview",
- s_t:"Coming soon",s_sub:"BiteSafe Pakistan will grow beyond dog bites. These features are planned next.",
- sn:"Snakebite",sn1:"Find hospitals with antivenom stock",sn2:"Emergency alert to the nearest hospital",sn3:"Snake identification guide",sn_tip:"Keep the person calm and still, and go to a hospital immediately. Do not cut the bite, suck out the venom or tie a tight band.",
- sc:"Scorpion sting",sc1:"Find the nearest hospital with emergency care",sc2:"Warning signs checklist",sc3:"Alerts for high-risk areas",sc_tip:"Keep the person calm and get to a hospital quickly, especially for children.",
- ot:"Other poisonous bites",ot1:"Spiders, insects and other venomous animals",ot2:"Quick first-aid guidance",ot3:"Nearest hospital finder",
- pl:"Platform upgrades",pl1:"Real SMS and WhatsApp reminders",pl2:"Live stock sync across all phones",pl3:"More languages: Sindhi, Pashto, Punjabi",
- bg:"Basic guidance only. Always see a doctor."},
-ur:{sub:"ریبیز کی ویکسین تلاش کریں۔ کوئی خوراک مس نہ کریں۔",tag:"کتے کے کاٹنے کے مریضوں اور ان کے خاندانوں کے لیے",
- tab1:"مریض",tab2:"ہسپتال",tab3:"ایڈمن",tab4:"جلد آ رہا ہے",
- hero_t:"کیا آپ کو کتے نے کاٹا ہے؟",hero_b:"پرسکون رہیں۔ زخم دھوئیں، پھر ایسا ہسپتال تلاش کریں جہاں آج ویکسین موجود ہو۔",
- fa_t:"ابتدائی طبی امداد، ابھی یہ کریں",fa_b:"زخم کو صابن اور بہتے پانی سے کم از کم 15 منٹ دھوئیں۔ پھر ویکسین کے لیے ہسپتال جائیں۔ زخم پر مرچ یا تیل نہ لگائیں اور نہ ہی اسے کس کر باندھیں۔",
- k1:"آج ویکسین والے ہسپتال",k2:"اسٹاک میں خوراکیں",k3:"درج شدہ کیسز",
- all:"سب",only:"صرف ویکسین والے",near:"آپ کے قریب ہسپتال",avail:"دستیاب",lowS:"کم",outS:"ختم",doses:"خوراکیں",upd:"اپڈیٹ",ago:"پہلے",now:"ابھی ابھی",min:"منٹ",hr:"گھنٹہ",
- dir:"راستہ دیکھیں",reg:"مجھے کاٹا گیا: میرا کیس درج کریں",mycase:"میرا کیس",sched:"خوراک کا شیڈول",day:"دن",due:"تاریخ",given:"لگ چکی",overdue:"تاخیر",
- rem:"میرا یاد دہانی پیغام دیکھیں",name:"مریض کا نام",phone:"موبائل نمبر",tal:"آپ کی تحصیل",hosp:"پسندیدہ ہسپتال",bite:"آپ کو کب کاٹا گیا؟",
- today:"آج",yest:"کل",daysago:"دن پہلے",save:"درج کریں اور شیڈول حاصل کریں",back:"واپس",saved:"کیس درج ہو گیا۔ شیڈول بن گیا۔",
- hl:"ہسپتال عملے کا لاگ اِن",hsel:"ہسپتال منتخب کریں",pin:"پن",pinh:"نمونہ پن: 1234",login:"لاگ اِن",logout:"لاگ آؤٹ",badpin:"پن غلط ہے",
- stock:"اسٹاک میں ویکسین کی خوراکیں",out0:"صفر کریں",pend:"خوراک کے منتظر مریض",giveb:"خوراک لگ گئی",nopat:"اس ہسپتال کا کوئی مریض نہیں۔",nostock:"اسٹاک نہیں ہے۔ پہلے اسٹاک اپڈیٹ کریں۔",stockup:"اسٹاک اپڈیٹ ہو گیا۔ مریض اب دیکھ سکتے ہیں۔",dgiven:"خوراک درج ہو گئی۔",
- ad:"قومی ڈیش بورڈ",ad2:"نمونہ ڈیٹا، ضلع دادو",h_n:"ہسپتال",s_n:"اسٹاک میں خوراکیں",c_n:"فعال کیسز",l_n:"کم یا ختم",map:"ہاٹ اسپاٹ نقشہ (خاکہ)",
- cases:"کیسز",need:"درکار خوراکیں",ins:"تحصیل کے لحاظ سے اسٹاک",short:"کمی",fine:"ٹھیک",alerts:"انتباہات",noal:"کوئی انتباہ نہیں۔ تمام ہسپتالوں میں اسٹاک ہے۔",
- copy:"ماہانہ رپورٹ کاپی کریں",copied:"رپورٹ کاپی ہو گئی۔",reset:"نمونہ ڈیٹا ری سیٹ کریں",rdone:"نمونہ ڈیٹا ری سیٹ ہو گیا۔",
- team:"ٹیم بائٹ بسٹرز",
- foot:"پروٹوٹائپ۔ یہاں دکھائے گئے ہسپتال، مریض اور اعداد نمونہ ڈیٹا ہیں۔",
- rtxt:"BiteSafe Pakistan: السلام علیکم {n}، آپ کی ریبیز ویکسین کی اگلی خوراک {d} کو {h} میں ہے۔ براہِ کرم مس نہ کریں۔",rprev:"واٹس ایپ / ایس ایم ایس پیش منظر",
- s_t:"جلد آ رہا ہے",s_sub:"بائٹ سیف پاکستان کتے کے کاٹنے سے آگے بھی بڑھے گا۔ یہ فیچرز اگلے مرحلے میں شامل کیے جائیں گے۔",
- sn:"سانپ کا کاٹنا",sn1:"اینٹی وینم والے ہسپتال تلاش کریں",sn2:"قریب ترین ہسپتال کو ہنگامی اطلاع",sn3:"سانپ کی پہچان کی رہنمائی",sn_tip:"متاثرہ شخص کو پرسکون اور ساکن رکھیں اور فوراً ہسپتال لے جائیں۔ کاٹی ہوئی جگہ کو کاٹیں نہیں، زہر چوسنے کی کوشش نہ کریں اور کس کر پٹی نہ باندھیں۔",
- sc:"بچھو کا ڈنک",sc1:"ہنگامی علاج والا قریب ترین ہسپتال تلاش کریں",sc2:"خطرے کی علامات کی فہرست",sc3:"زیادہ خطرے والے علاقوں کی اطلاع",sc_tip:"متاثرہ شخص کو پرسکون رکھیں اور جلد ہسپتال پہنچیں، خاص طور پر بچوں کے لیے۔",
- ot:"دیگر زہریلے کاٹنے",ot1:"مکڑی، کیڑے اور دیگر زہریلے جانور",ot2:"فوری ابتدائی امداد کی رہنمائی",ot3:"قریب ترین ہسپتال کی تلاش",
- pl:"پلیٹ فارم کی بہتری",pl1:"حقیقی ایس ایم ایس اور واٹس ایپ یاد دہانیاں",pl2:"تمام فونز پر لائیو اسٹاک اپڈیٹ",pl3:"مزید زبانیں: سندھی، پشتو، پنجابی",
- bg:"یہ صرف بنیادی رہنمائی ہے۔ ہمیشہ ڈاکٹر سے رجوع کریں۔"}
-};
+  <header class="hero">
+    <h1>Abdul Raheem</h1>
+    <p class="tagline">IT Student &amp; Web Developer</p>
+    <p>I build clean, mobile-friendly websites for small businesses.</p>
+    <a href="#contact" class="btn">Hire Me</a>
+  </header>
 
-function seed(){
- var H=[
-  {id:1,name:"Civil Hospital Dadu",t:"Dadu",km:2,stock:24},
-  {id:2,name:"THQ Hospital Mehar",t:"Mehar",km:48,stock:0},
-  {id:3,name:"THQ Hospital Johi",t:"Johi",km:62,stock:6},
-  {id:4,name:"THQ Hospital Khairpur Nathan Shah",t:"Khairpur Nathan Shah",km:35,stock:3},
-  {id:5,name:"RHC Radhan",t:"Mehar",km:41,stock:12}
- ];
- H.forEach(function(h,i){h.upd=Date.now()-(i*13+4)*60000;});
- function mk(id,n,t,h,ago,done){return {id:id,name:n,phone:"03XX-XXXXXXX",t:t,h:h,bite:TODAY-ago*DAY,doses:DOSE_DAYS.map(function(d,i){return {d:d,done:i<done};})};}
- var P=[
-  mk(1,"Ali Raza","Dadu",1,1,1),mk(2,"Sana Bibi","Dadu",1,3,2),mk(3,"Imran Khoso","Dadu",1,6,2),
-  mk(4,"Zainab","Dadu",1,0,0),mk(5,"Hamid Mallah","Dadu",1,9,3),mk(6,"Rukhsana","Dadu",1,12,3),
-  mk(7,"Asif Jatoi","Dadu",1,2,1),mk(8,"Noor Muhammad","Dadu",1,5,2),mk(9,"Kainat","Dadu",1,4,2),
-  mk(10,"Shabir Channa","Mehar",2,1,0),mk(11,"Mehnaz","Mehar",5,2,1),mk(12,"Ghulam Rasool","Mehar",5,6,2),
-  mk(13,"Faiza","Mehar",2,3,1),mk(14,"Bashir","Mehar",5,0,0),
-  mk(15,"Sajid Lashari","Johi",3,2,1),mk(16,"Amna","Johi",3,7,3),mk(17,"Dilawar","Johi",3,1,1),
-  mk(18,"Yasmeen","Khairpur Nathan Shah",4,4,2),mk(19,"Ramzan","Khairpur Nathan Shah",4,0,0)
- ];
- return {hospitals:H,patients:P,nextId:20,myId:null};
-}
-var D;
-try{var raw=localStorage.getItem(LS);D=raw?JSON.parse(raw):seed();}catch(e){D=seed();}
-if(!D||!D.hospitals){D=seed();}
-function save(){try{localStorage.setItem(LS,JSON.stringify(D));}catch(e){}}
-var U={lang:"en",tab:"p",view:"home",tal:"All",onlyAv:false,staffId:null,authed:false,toast:""};
-var $app=document.getElementById("app"),toastT=null;
+  <section id="about">
+    <h2>About Me</h2>
+    <p>
+      I am a 2nd year IT student at Sindh University. I work with HTML, CSS,
+      JavaScript and Java, and I am learning to build websites and apps that
+      solve real problems.
+    </p>
+  </section>
 
-function t(k){return (I18N[U.lang][k])||k;}
-function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
-function fmt(ts){return new Date(ts).toLocaleDateString("en-GB",{day:"numeric",month:"short"});}
-function rel(ts){var m=Math.max(0,Math.round((Date.now()-ts)/60000));if(m<1)return t("now");if(m<60)return m+" "+t("min")+" "+t("ago");return Math.round(m/60)+" "+t("hr")+" "+t("ago");}
-function status(s){return s>=5?"ok":(s>=1?"low":"out");}
-function statusLabel(s){return s>=5?t("avail"):(s>=1?t("lowS"):t("outS"));}
-function hById(id){return D.hospitals.filter(function(h){return h.id===id;})[0];}
-function pById(id){return D.patients.filter(function(p){return p.id===id;})[0];}
-function nextDose(p){for(var i=0;i<p.doses.length;i++){if(!p.doses[i].done)return i;}return -1;}
-function dueTs(p,i){return p.bite+p.doses[i].d*DAY;}
-function active(p){return nextDose(p)>=0;}
-function pending(p){return p.doses.filter(function(x){return !x.done;}).length;}
-function toast(m){U.toast=m;render();clearTimeout(toastT);toastT=setTimeout(function(){U.toast="";render();},2400);}
-function bdi(s){return "<bdi>"+esc(s)+"</bdi>";}
+  <section id="skills">
+    <h2>Skills</h2>
+    <ul class="skills">
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+      <li>Java</li>
+      <li>Responsive Design</li>
+    </ul>
+  </section>
 
-function dog(cls){return '<svg class="'+cls+'" viewBox="0 0 120 112" aria-hidden="true"><g stroke="#14212b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><path d="M24 30C8 34 4 62 14 76c6 8 18 4 20-8l2-32z" fill="#8a4b1f"/><path d="M96 30c16 4 20 32 10 46-6 8-18 4-20-8l-2-32z" fill="#8a4b1f"/><ellipse cx="60" cy="54" rx="38" ry="34" fill="#f5b266"/><ellipse cx="60" cy="70" rx="21" ry="15" fill="#fff3e0" stroke-width="2.5"/><ellipse cx="60" cy="62" rx="8.5" ry="6" fill="#14212b"/><path d="M60 68v7M51 75q9 8 18 0" fill="none" stroke-width="2.5"/><path d="M54 77q6 13 12 0z" fill="#ff6b8b" stroke-width="2"/><circle cx="46" cy="47" r="5" fill="#14212b" stroke="none"/><circle cx="74" cy="47" r="5" fill="#14212b" stroke="none"/><circle cx="47.6" cy="45.4" r="1.6" fill="#fff" stroke="none"/><circle cx="75.6" cy="45.4" r="1.6" fill="#fff" stroke="none"/><g transform="rotate(-18 60 24)"><rect x="40" y="16" width="40" height="13" rx="4" fill="#fff" stroke-width="2.5"/><path d="M60 19v7M56.5 22.5h7" stroke="#ff6b5b" stroke-width="2.5"/></g><path d="M30 90q30 18 60 0" fill="none" stroke="#ff6b5b" stroke-width="8"/><circle cx="60" cy="102" r="8" fill="#ffc233" stroke-width="2.5"/><path d="M60 98v8M56 102h8" stroke-width="2"/></g></svg>';}
-var ICON={
- p:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
- h:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 8v8M8 12h8"/></svg>',
- a:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
- s:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
-};
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="cards">
 
-/* ---------- Patient ---------- */
-function vHome(){
- var h="";
- var me=D.myId?pById(D.myId):null;
- var avN=D.hospitals.filter(function(x){return x.stock>0;}).length,tot=D.hospitals.reduce(function(a,x){return a+x.stock;},0);
- h+='<div class="top2"><div class="card hero"><div><h2>'+t("hero_t")+'</h2><p>'+t("hero_b")+'</p><button class="btn coral" data-a="reg">'+t("reg")+'</button></div>'+dog("dogb")+'</div>';
- h+='<div class="alert"><b>'+t("fa_t")+'</b>'+t("fa_b")+'</div></div>';
- h+='<div class="kpis"><div class="kpi" style="background:#bff3dc"><b>'+avN+'/'+D.hospitals.length+'</b><span>'+t("k1")+'</span></div><div class="kpi" style="background:#cfe9ff"><b>'+tot+'</b><span>'+t("k2")+'</span></div><div class="kpi" style="background:#e4dcff"><b>'+D.patients.length+'</b><span>'+t("k3")+'</span></div></div>';
- if(me){h+=vMyCard(me);}
- h+='<h2 class="title2">'+t("near")+'</h2>';
- h+='<div class="chips" role="group">';
- ["All"].concat(TAL).forEach(function(x){h+='<button class="fchip'+(U.tal===x?' on':'')+'" data-a="tal" data-v="'+esc(x)+'">'+(x==="All"?t("all"):esc(x))+'</button>';});
- h+='<button class="fchip'+(U.onlyAv?' on':'')+'" data-a="onlyav">'+t("only")+'</button></div>';
- var list=D.hospitals.filter(function(x){return (U.tal==="All"||x.t===U.tal)&&(!U.onlyAv||x.stock>0);});
- list.sort(function(a,b){return (b.stock>0)-(a.stock>0)||a.km-b.km;});
- if(!list.length)h+='<div class="empty">—</div>';
- h+='<div class="hgrid">';
- list.forEach(function(x){
-  var s=status(x.stock);
-  h+='<div class="card hosp"><div class="row sp"><div><b>'+esc(x.name)+'</b><div class="mut">'+esc(x.t)+' · '+x.km+' km</div></div><span class="chip '+s+'"><span class="dot"></span>'+statusLabel(x.stock)+'</span></div>'+
-  '<div class="row sp"><div class="mut">'+x.stock+' '+t("doses")+' · '+t("upd")+' '+rel(x.upd)+'</div>'+
-  '<a class="btn ghost sm" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(x.name+" "+x.t)+'">'+t("dir")+'</a></div></div>';
- });
- h+='</div>';
- return h;
-}
-function vMyCard(p){
- var hs=hById(p.h),n=nextDose(p),h='<div class="card"><h2>'+t("mycase")+': '+bdi(p.name)+'</h2><div class="mut" style="margin-bottom:6px">'+bdi(hs.name)+'</div>';
- h+='<div style="margin:6px 0 4px;font-weight:700">'+t("sched")+'</div>';
- p.doses.forEach(function(d,i){
-  var due=dueTs(p,i),cls=d.done?"done":(i===n?(due<TODAY?"late":"next"):""),lab=d.done?t("given"):(due<TODAY?t("overdue"):t("due"));
-  h+='<div class="dose"><div class="circle '+cls+'">'+(d.done?"✓":i+1)+'</div><div style="flex:1"><b>'+t("day")+' '+d.d+'</b><div class="mut">'+fmt(due)+'</div></div><span class="chip '+(d.done?'ok':(due<TODAY?'out':'low'))+'">'+lab+'</span></div>';
- });
- if(n>=0)h+='<button class="btn ghost" style="margin-top:10px" data-a="rem">'+t("rem")+'</button>';
- if(U.view==="rem"&&n>=0){
-  var msg=I18N[U.lang].rtxt.replace("{n}",bdi(p.name)).replace("{d}",bdi(fmt(dueTs(p,n)))).replace("{h}",bdi(hs.name));
-  h+='<div class="chat" style="margin-top:10px"><div class="bubble">'+msg+'<small>'+t("rprev")+'</small></div></div>';
- }
- return h+'</div>';
-}
-function vReg(){
- var h='<button class="btn ghost sm" data-a="home">'+(U.lang==="ur"?"→ ":"← ")+t("back")+'</button><div class="card"><h2>'+t("reg")+'</h2>';
- h+='<label for="f_n">'+t("name")+'</label><input id="f_n" autocomplete="name">';
- h+='<label for="f_p">'+t("phone")+'</label><input id="f_p" type="tel" inputmode="tel" dir="ltr" placeholder="03XX-XXXXXXX">';
- h+='<label for="f_t">'+t("tal")+'</label><select id="f_t" data-a="ftal">'+TAL.map(function(x){return '<option>'+esc(x)+'</option>';}).join("")+'</select>';
- h+='<label for="f_h">'+t("hosp")+'</label><select id="f_h">'+hospOpts(TAL[0])+'</select>';
- h+='<label for="f_b">'+t("bite")+'</label><select id="f_b"><option value="0">'+t("today")+'</option><option value="1">'+t("yest")+'</option>'+[2,3,4,5].map(function(n){return '<option value="'+n+'">'+n+' '+t("daysago")+'</option>';}).join("")+'</select>';
- h+='<button class="btn sun" style="margin-top:16px" data-a="savereg">'+t("save")+'</button></div>';
- return h;
-}
-function hospOpts(tal){
- var l=D.hospitals.filter(function(x){return x.t===tal;});if(!l.length)l=D.hospitals;
- l.sort(function(a,b){return (b.stock>0)-(a.stock>0);});
- return l.map(function(x){return '<option value="'+x.id+'">'+esc(x.name)+' ('+x.stock+' '+t("doses")+')</option>';}).join("");
-}
+      <div class="card">
+        <h3>BiteSafe Pakistan</h3>
+        <p>Team project (4 students), shown at our department exhibition. A web app to find rabies vaccine stock and track dose schedules. Prototype with sample data, English and Urdu.</p>
+        <a href="https://abdulraheem-build.github.io/bitesafe-pakistan/">View Project</a>
+      </div>
 
-/* ---------- Staff ---------- */
-function vStaff(){
- var h="";
- if(!U.authed){
-  h+='<div class="card" style="max-width:560px"><h2>'+t("hl")+'</h2><label for="s_h">'+t("hsel")+'</label><select id="s_h">'+D.hospitals.map(function(x){return '<option value="'+x.id+'">'+esc(x.name)+'</option>';}).join("")+'</select>';
-  h+='<label for="s_p">'+t("pin")+'</label><input id="s_p" type="password" inputmode="numeric" dir="ltr" placeholder="'+t("pinh")+'">';
-  h+='<button class="btn" style="margin-top:16px" data-a="login">'+t("login")+'</button></div>';
-  return h;
- }
- var hs=hById(U.staffId),s=status(hs.stock);
- h+='<div class="row sp"><b style="font-size:18px">'+bdi(hs.name)+'</b><button class="btn ghost sm" data-a="logout">'+t("logout")+'</button></div>';
- h+='<div class="card"><div class="mut">'+t("stock")+'</div><div class="row sp"><div class="big">'+hs.stock+'</div><span class="chip '+s+'"><span class="dot"></span>'+statusLabel(hs.stock)+'</span></div>';
- h+='<div class="stepper"><button data-a="st" data-v="-1" aria-label="minus 1">−1</button><button data-a="st" data-v="1" aria-label="plus 1">+1</button><button data-a="st" data-v="10" aria-label="plus 10">+10</button><button data-a="st" data-v="0">'+t("out0")+'</button></div></div>';
- var pl=D.patients.filter(function(p){return p.h===hs.id&&active(p);});
- h+='<h2 class="title2">'+t("pend")+' ('+pl.length+')</h2>';
- if(!pl.length)h+='<div class="empty">'+t("nopat")+'</div>';
- pl.sort(function(a,b){return dueTs(a,nextDose(a))-dueTs(b,nextDose(b));});
- h+='<div class="hgrid">';
- pl.forEach(function(p){
-  var n=nextDose(p),due=dueTs(p,n),late=due<TODAY;
-  h+='<div class="card"><div class="row sp"><div><b>'+bdi(p.name)+'</b><div class="mut">'+t("day")+' '+p.doses[n].d+' · '+fmt(due)+'</div></div><span class="chip '+(late?'out':(due===TODAY?'low':'ok'))+'">'+(late?t("overdue"):(due===TODAY?t("today"):t("due")))+'</span></div>'+
-  '<button class="btn sm" style="margin-top:10px;width:100%" data-a="give" data-v="'+p.id+'">'+t("giveb")+'</button></div>';
- });
- h+='</div>';
- return h;
-}
+      <div class="card">
+        <h3>Practice Project: Java Calculator</h3>
+        <p>Coming soon. A basic calculator in Java to revise my fundamentals.</p>
+      </div>
 
-/* ---------- Admin ---------- */
-function talStats(){
- return TAL.map(function(x){
-  var ps=D.patients.filter(function(p){return p.t===x&&active(p);});
-  var need=ps.reduce(function(a,p){return a+pending(p);},0);
-  var st=D.hospitals.filter(function(h){return h.t===x;}).reduce(function(a,h){return a+h.stock;},0);
-  return {t:x,cases:ps.length,need:need,stock:st};
- });
-}
-function vAdmin(){
- var ts=talStats(),tot=D.hospitals.reduce(function(a,h){return a+h.stock;},0);
- var act=D.patients.filter(active).length,lowN=D.hospitals.filter(function(h){return h.stock<5;}).length;
- var h='<div><h2 style="margin:0;font-size:22px">'+t("ad")+'</h2><div class="mut">'+t("ad2")+'</div></div>';
- h+='<div class="grid2"><div class="stat"><b>'+D.hospitals.length+'</b><span>'+t("h_n")+'</span></div><div class="stat"><b>'+tot+'</b><span>'+t("s_n")+'</span></div><div class="stat"><b>'+act+'</b><span>'+t("c_n")+'</span></div><div class="stat"><b style="color:'+(lowN?'#b3261e':'#13693a')+'">'+lowN+'</b><span>'+t("l_n")+'</span></div></div>';
- var pos={"Mehar":[92,62],"Dadu":[225,80],"Johi":[105,165],"Khairpur Nathan Shah":[235,180]};
- var shapes={"Mehar":"M20 30L150 15L165 100L35 110Z","Dadu":"M165 100L150 15L290 40L300 125L180 135Z","Johi":"M35 110L165 100L180 135L170 225L40 210Z","Khairpur Nathan Shah":"M180 135L300 125L290 225L170 225Z"};
- var fills={"Mehar":"#d6f3ea","Dadu":"#dff0ff","Johi":"#ece6ff","Khairpur Nathan Shah":"#fff0c7"};
- var svg='<svg viewBox="0 0 320 245" style="width:100%;height:auto" role="img" aria-label="'+t("map")+'" dir="ltr">';
- ts.forEach(function(x){svg+='<path d="'+shapes[x.t]+'" fill="'+fills[x.t]+'" stroke="#14212b" stroke-width="3" stroke-linejoin="round"/>';});
- ts.forEach(function(x){
-  var p=pos[x.t],r=Math.min(40,10+x.cases*3.2),short=x.need>x.stock;
-  svg+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+r+'" fill="'+(short?'#ff6b5b':'#ffc233')+'" fill-opacity=".85" stroke="#14212b" stroke-width="2.5"/>'+
-  '<text x="'+p[0]+'" y="'+(p[1]+5)+'" text-anchor="middle" font-size="15" font-weight="800" fill="#14212b">'+x.cases+'</text>'+
-  '<text x="'+p[0]+'" y="'+(p[1]+r+14)+'" text-anchor="middle" font-size="11" font-weight="700" fill="#14212b" stroke="#fff" stroke-width="4" stroke-linejoin="round" paint-order="stroke">'+(x.t==="Khairpur Nathan Shah"?"Khairpur N.S.":x.t)+'</text>';
- });
- svg+='</svg>';
- h+='<div class="split"><div class="card"><h3>'+t("map")+'</h3>'+svg+'</div><div style="display:flex;flex-direction:column;gap:14px">';
- h+='<div class="card"><h3>'+t("ins")+'</h3><table><tr><th>Taluka</th><th>'+t("cases")+'</th><th>'+t("need")+'</th><th>'+t("s_n")+'</th><th></th></tr>';
- ts.forEach(function(x){var sh=x.need>x.stock;h+='<tr><td><b>'+(x.t==="Khairpur Nathan Shah"?"Khairpur N.S.":x.t)+'</b></td><td>'+x.cases+'</td><td>'+x.need+'</td><td>'+x.stock+'</td><td><span class="chip '+(sh?'out':'ok')+'">'+(sh?t("short"):t("fine"))+'</span></td></tr>';});
- h+='</table></div>';
- h+='<div class="card"><h3>'+t("alerts")+'</h3>';
- var al=D.hospitals.filter(function(x){return x.stock<5;});
- if(!al.length)h+='<div class="mut">'+t("noal")+'</div>';
- al.forEach(function(x){h+='<div class="row sp" style="padding:6px 0;border-top:2px dashed #b8cdd2"><span>'+bdi(x.name)+'</span><span class="chip '+status(x.stock)+'">'+x.stock+' '+t("doses")+'</span></div>';});
- h+='</div></div></div>';
- h+='<div class="row" style="flex-wrap:wrap"><button class="btn" data-a="copy">'+t("copy")+'</button><button class="btn ghost" data-a="reset">'+t("reset")+'</button></div>';
- return h;
-}
+    </div>
+  </section>
 
-/* ---------- Coming soon ---------- */
-function vSoon(){
- function card(bg,icon,title,items,tip){
-  var li=items.map(function(x){return '<li>'+t(x)+'</li>';}).join("");
-  return '<div class="card soon"><div class="top" style="background:'+bg+'">'+icon+'<h3>'+t(title)+'</h3><span class="soonb">'+t("s_t")+'</span></div><div class="bd"><ul>'+li+'</ul>'+(tip?'<div class="tip">'+t(tip)+'<br><b>'+t("bg")+'</b></div>':'')+'</div></div>';
- }
- var snake='<svg viewBox="0 0 76 50" aria-hidden="true"><g stroke="#14212b" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6 40c8-20 18 12 28-4s16-22 26-12"/><circle cx="62" cy="22" r="7" fill="#7be0b5"/><path d="M69 24l6 2M69 26l6-1"/></g><circle cx="61" cy="20" r="1.6" fill="#14212b"/></svg>';
- var scorp='<svg viewBox="0 0 76 50" aria-hidden="true"><g stroke="#14212b" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="34" cy="34" rx="15" ry="9" fill="#ffc233"/><path d="M48 31c14-1 20-14 10-24M58 7l6 6"/><path d="M22 28c-8-2-12-8-9-15M12 13h8"/><path d="M24 40l-6 6M34 43v5M44 40l5 6"/></g></svg>';
- var warn='<svg viewBox="0 0 76 50" aria-hidden="true"><g stroke="#14212b" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"><path d="M38 4 64 46H12z" fill="#ffc233"/><path d="M38 19v14M38 38v2" fill="none"/></g></svg>';
- var rocket='<svg viewBox="0 0 76 50" aria-hidden="true"><g stroke="#14212b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"><rect x="22" y="4" width="26" height="42" rx="6" fill="#fff"/><path d="M28 14h14M28 22h14" fill="none"/><circle cx="35" cy="36" r="3" fill="#ff6b5b"/><path d="M54 14c6 0 10 4 10 10s-4 10-10 10" fill="none"/></g></svg>';
- var h='<div class="card" style="background:#14212b;color:#fff"><h2 style="color:#ffc233;margin:0 0 4px;font-size:24px">'+t("s_t")+'</h2><div>'+t("s_sub")+'</div></div>';
- h+='<div class="softgrid">'+card("#b8f0d8",snake,"sn",["sn1","sn2","sn3"],"sn_tip")+card("#ffe29a",scorp,"sc",["sc1","sc2","sc3"],"sc_tip")+card("#ffc9c2",warn,"ot",["ot1","ot2","ot3"],null)+card("#d9ccff",rocket,"pl",["pl1","pl2","pl3"],null)+'</div>';
- return h;
-}
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:abdulraheem.build@gmail.com">abdulraheem.build@gmail.com</a></p>
+    <p>WhatsApp: <a href="https://wa.me/923124278144">+92 312 4278144</a></p>
+    <p>GitHub: <a href="https://github.com/abdulraheem-build">github.com/abdulraheem-build</a></p>
+  </section>
 
-function vTeam(){
- var m=TEAM.map(function(x){return '<div class="mem"><b dir="ltr">'+esc(x[0])+'</b><span class="chip" dir="ltr">'+esc(x[1])+'</span></div>';}).join("");
- return '<div class="team"><h3>'+t("team")+'</h3><div class="members">'+m+'</div></div>';
-}
+  <footer>
+    <p>&copy; 2026 Abdul Raheem</p>
+  </footer>
 
-/* ---------- Render ---------- */
-function render(){
- var body;
- if(U.tab==="p"){body=(U.view==="reg")?vReg():vHome();}
- else if(U.tab==="h"){body=vStaff();}
- else if(U.tab==="a"){body=vAdmin();}
- else{body=vSoon();}
- $app.setAttribute("dir",U.lang==="ur"?"rtl":"ltr");
- document.documentElement.lang=U.lang==="ur"?"ur":"en";
- var nav=[["p",t("tab1")],["h",t("tab2")],["a",t("tab3")],["s",t("tab4")]].map(function(x){return '<button data-a="tab" data-v="'+x[0]+'" class="'+(U.tab===x[0]?'on':'')+'" aria-label="'+x[1]+'">'+ICON[x[0]]+x[1]+'</button>';}).join("");
- $app.innerHTML='<header>'+dog("dogh")+'<div><h1>BiteSafe Pakistan</h1><p>'+t("sub")+'</p><span class="badge">'+t("team")+'</span></div><button class="lang" data-a="lang" aria-label="Language">'+(U.lang==="en"?"اردو":"English")+'</button></header><main>'+body+vTeam()+'<div class="foot">'+t("foot")+'</div></main><nav>'+nav+'</nav>'+(U.toast?'<div class="toast" role="status">'+esc(U.toast)+'</div>':'');
-}
-
-/* ---------- Events ---------- */
-$app.addEventListener("change",function(e){
- var a=e.target.getAttribute("data-a");
- if(a==="ftal"){document.getElementById("f_h").innerHTML=hospOpts(e.target.value);}
-});
-$app.addEventListener("click",function(e){
- var b=e.target.closest("[data-a]");if(!b||b.tagName==="SELECT")return;
- var a=b.getAttribute("data-a"),v=b.getAttribute("data-v");
- if(a==="tab"){U.tab=v;U.view="home";render();window.scrollTo(0,0);}
- else if(a==="lang"){U.lang=U.lang==="en"?"ur":"en";render();}
- else if(a==="tal"){U.tal=v;render();}
- else if(a==="onlyav"){U.onlyAv=!U.onlyAv;render();}
- else if(a==="reg"){U.view="reg";render();window.scrollTo(0,0);}
- else if(a==="home"){U.view="home";render();}
- else if(a==="rem"){U.view=(U.view==="rem")?"home":"rem";render();}
- else if(a==="savereg"){
-  var n=document.getElementById("f_n").value.trim();
-  if(!n){document.getElementById("f_n").focus();return;}
-  var p={id:D.nextId++,name:n,phone:document.getElementById("f_p").value.trim(),t:document.getElementById("f_t").value,h:+document.getElementById("f_h").value,bite:TODAY-(+document.getElementById("f_b").value)*DAY,doses:DOSE_DAYS.map(function(d){return {d:d,done:false};})};
-  D.patients.push(p);D.myId=p.id;save();U.view="home";toast(t("saved"));window.scrollTo(0,0);
- }
- else if(a==="login"){
-  if(document.getElementById("s_p").value!=="1234"){toast(t("badpin"));return;}
-  U.staffId=+document.getElementById("s_h").value;U.authed=true;render();
- }
- else if(a==="logout"){U.authed=false;U.staffId=null;render();}
- else if(a==="st"){
-  var h=hById(U.staffId),d=+v;
-  if(d===0)h.stock=0;else h.stock=Math.max(0,h.stock+d);
-  h.upd=Date.now();save();toast(t("stockup"));
- }
- else if(a==="give"){
-  var p2=pById(+v),h2=hById(p2.h);
-  if(h2.stock<1){toast(t("nostock"));return;}
-  var n2=nextDose(p2);if(n2<0)return;
-  p2.doses[n2].done=true;h2.stock-=1;h2.upd=Date.now();save();toast(t("dgiven"));
- }
- else if(a==="copy"){
-  var ts=talStats(),txt="BiteSafe Pakistan monthly report (sample data)\n"+ts.map(function(x){return x.t+": "+x.cases+" cases, "+x.need+" doses needed, "+x.stock+" in stock"+(x.need>x.stock?" (SHORTAGE)":"");}).join("\n");
-  try{navigator.clipboard.writeText(txt).then(function(){toast(t("copied"));},function(){toast(txt);});}catch(err){toast(txt);}
- }
- else if(a==="reset"){D=seed();save();U.authed=false;U.staffId=null;U.view="home";toast(t("rdone"));}
-});
-render();
-})();
-</script>
 </body>
 </html>
